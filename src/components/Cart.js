@@ -1,25 +1,19 @@
-function Cart() {
+function Cart({ onClose, onRemove, items = [] }) {
 	return (
-		<div style={{ display: 'none' }} className="overlay">
+		<div className="overlay">
 			<div className="cart">
-				<h2 className="">Корзина <img className="remove-icon" src="./img/remove.svg" alt="remove" /></h2>
+				<h2 className="">Корзина <img className="remove-icon" onClick={onClose} src="./img/remove.svg" alt="remove" /></h2>
 				<div className="cart__items">
-					<div className="cart__item">
-						<img width={70} height={70} className="mini-logo" src="./img/sneakers/pos2.png" alt="Sneakers" />
-						<div className="cart__disc">
-							<p>Мужские Кроссовки Nike Air Max 270</p>
-							<b>12 999 руб.</b>
+					{items.map((item) => (
+						<div className="cart__item">
+							<img width={70} height={70} className="mini-logo" src={item.imageUrl} alt="Sneakers" />
+							<div className="cart__disc">
+								<p>{item.title}</p>
+								<b>{item.price} руб.</b>
+							</div>
+							<img onClick={() => onRemove(item.id)} className="remove-icon" src="./img/remove.svg" alt="remove" />
 						</div>
-						<img className="remove-icon" src="./img/remove.svg" alt="remove" />
-					</div>
-					<div className="cart__item">
-						<img width={70} height={70} className="mini-logo" src="./img/sneakers/pos4.png" alt="Sneakers" />
-						<div className="cart__disc">
-							<p>Мужские Кроссовки Nike Air Max 270</p>
-							<b>8 999 руб.</b>
-						</div>
-						<img className="remove-icon" src="./img/remove.svg" alt="remove" />
-					</div>
+					))}
 				</div>
 				<div className="calc">
 					<ul >
@@ -40,5 +34,6 @@ function Cart() {
 		</div>
 	)
 }
+
 
 export default Cart;
