@@ -25,10 +25,12 @@ function Header(props) {
 					</Link>
 				</li>
 				<li>
-					<img width={18} height={18} src="./img/cabinet.svg" alt="cabinet" />
+					<Link to="/">
+						<img width={18} height={18} src="./img/cabinet.svg" alt="cabinet" />
+					</Link>
 				</li>
 			</ul>
-		</header>
+		</header >
 	)
 }
 

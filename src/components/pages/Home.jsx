@@ -1,31 +1,37 @@
 import Card from '../Card';
 
-function Home(searchValue, OnSearchInput, setSearchValue, items, onCart) {
+function Home({
+	items,
+	searchValue,
+	setSearchValue,
+	onChangeSearchInput,
+	onAddToFavorite,
+	onCart,
+}) {
 	return (
-		<div className="content">
+		<>
 			<div className="content__top">
 				<h1 className="content__title"> {searchValue ? `Поиск по запросу: "${searchValue}"` : 'Все кроссовки'}</h1>
 				<div className="content__search">
 					<img src="./img/search.svg" alt="Search" />
-					<input onChange={OnSearchInput} value={searchValue} placeholder="Поиск ..." />
+					<input onChange={onChangeSearchInput} value={searchValue} placeholder="Поиск ..." />
 					{searchValue && <img onClick={() => setSearchValue('')} className="search__clear" src="./img/remove.svg" alt="remove" />}
 				</div>
 			</div>
 			<div className="content__cards">
 				{items
-					.filter((obj) => obj.title.toLowerCase().includes(searchValue))
-					.map((obj, index) => (
+					.filter((item) => item.title.toLowerCase().includes(searchValue.toLowerCase()))
+					.map((item, index) => (
 						<Card
 							key={index}
-							title={obj.title}
-							price={obj.price}
-							imageUrl={obj.imageUrl}
-							addToCart={(item) => onCart(item)}
-							addToFavorite={() => console.log('Лайкнули')} />
+							onFavorite={(obj) => onAddToFavorite(obj)}
+							onPlus={(obj) => onCart(obj)}
+							{...item}
+						/>
 					))}
 			</div>
-		</div>
-	);
-}
+		</>
+	)
+};
 
-export default Home;
+export default Home

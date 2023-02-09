@@ -2,6 +2,7 @@ function Test() {
 	return (
 		<>
 			Это тестовая информация
+			asdas
 		</>
 	);
 }

@@ -1,24 +1,23 @@
 import styles from './Card.module.scss';
 import React from 'react';
 
-function Card({ imageUrl, title, price, addToFavorite, addToCart }) {
+function Card({ id, title, imageUrl, price, onFavorite, onPlus, liked = false }) {
 	const [isAdded, setIsAdded] = React.useState(false);
+	const [isFavorite, setIsFavorite] = React.useState(liked);
 
-	const handleAdd = () => {
-		addToCart({ imageUrl, title, price });
+	const onClickPlus = () => {
+		onPlus({ id, title, imageUrl, price });
 		setIsAdded(!isAdded);
-	}
+	};
 
-	const [isLiked, setIsLiked] = React.useState(false);
-
-	const handleLike = () => {
-		addToFavorite({ imageUrl, title, price });
-		setIsLiked(!isLiked);
-	}
+	const onClickFavorite = () => {
+		onFavorite({ id, title, imageUrl, price });
+		setIsFavorite(!isFavorite);
+	};
 
 	return (
 		<div className={styles.card}>
-			<img className={styles.favorite} onClick={handleLike} src={isLiked ? '/img/liked.svg' : '/img/unliked.svg'} alt="Unliked" />
+			<img className={styles.favorite} onClick={onClickFavorite} src={isFavorite ? '/img/liked.svg' : '/img/unliked.svg'} alt="Unliked" />
 			<img width={133} height={112} src={imageUrl} alt="sneakers" />
 			<p className={styles.discription}>{title}</p>
 			<div className={styles.price}>
@@ -26,7 +25,7 @@ function Card({ imageUrl, title, price, addToFavorite, addToCart }) {
 					<span>Цена:</span>
 					<p>{price} руб.</p>
 				</div>
-				<img width={32} height={32} src={isAdded ? "/img/cart-checked.svg" : "/img/plus.svg"} alt="add" onClick={handleAdd} />
+				<img width={32} height={32} src={isAdded ? "/img/cart-checked.svg" : "/img/plus.svg"} alt="add" onClick={onClickPlus} />
 			</div>
 		</div >
 	)

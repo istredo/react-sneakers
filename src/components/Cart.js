@@ -5,7 +5,7 @@ function Cart({ onClose, onRemove, items = [] }) {
 				<h2 className="">Корзина <img className="remove-icon" onClick={onClose} src="./img/remove.svg" alt="remove" /></h2>
 				<div className="cart__items">
 					{items.map((item) => (
-						<div className="cart__item">
+						<div key={item.id} className="cart__item">
 							<img width={70} height={70} className="mini-logo" src={item.imageUrl} alt="Sneakers" />
 							<div className="cart__disc">
 								<p>{item.title}</p>
